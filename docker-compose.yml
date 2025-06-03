@@ -1,0 +1,18 @@
+version: "3.8"
+
+services:
+  app:
+    build:
+      context: .
+    container_name: echo-server
+    ports:
+      - "8080:8080"
+    command: python -m echo_server.server
+
+  tests:
+    build:
+      context: .
+    container_name: echo-server-tests
+    command: pytest tests/
+    depends_on:
+      - app
